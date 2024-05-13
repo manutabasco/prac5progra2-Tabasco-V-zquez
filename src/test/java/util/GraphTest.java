@@ -33,9 +33,36 @@ public class GraphTest{
 		Graph<Integer> g = new Graph<>();
 		g.addEdge(1, 2);
 		assertTrue(g.containsVertex(1) && g.containsVertex(2) && g.obtainAdjacents(1).contains(2);
-	}catch(Exception e
+	}catch(Exception e){
+		System.err.println(e);
+	}
+    }
+    
+    @Test
+    public void addEdge2(){
+        try{
+            Graph<Integer> g = new Graph<>();
+            g.addEdge(1, 2);
+            g.addEdge(1, 3);
+            assertTrue(g.containsVertex(1) && g.containsVertex(2) && g.containsVertex(3) &&
+                    g.obtainAdjacents(1).contains(2) && g.obtainAdjacents(1).contains(3)); 
+        }catch(Exception e){
+            System.err.println(e);
+        }
     }
 
+    @Test(expected = Exception.class)
+    public void obtainAdjacentsThrowsException(){
+        Graph<Integer> g = new Graph<>();
+        g.obtainAdjacents(1);
+    }
+
+    @Test
+    public void shortestPathDoesNotExist(){
+        Graph<Integer> g = new Graph<>();
+        assertNull(g.shortestPath(1, 2));
+    }
+}
 
 
     public void shortestPathFindsAPath(){
