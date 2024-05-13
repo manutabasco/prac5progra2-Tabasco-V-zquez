@@ -1,4 +1,4 @@
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Graph<V> {
     // Lista de adyacencia.
@@ -39,7 +39,7 @@ public class Graph<V> {
      */
     public Set<V> obtainAdjacents(V v) throws Exception {
         if (!adjacencyList.containsKey(v)) {
-            throw new Exception("Vertex does not exist in the graph.");
+            throw new Exception("El vértice no existe en el grafo");
         }
         return adjacencyList.get(v);
     }
@@ -61,15 +61,15 @@ public class Graph<V> {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringbuilder = new StringBuilder();
         for (V vertex : adjacencyList.keySet()) {
-            sb.append(vertex).append(": ");
+            stringbuilder.append(vertex).append(": ");
             for (V neighbor : adjacencyList.get(vertex)) {
-                sb.append(neighbor).append(" ");
+                stringbuilder.append(neighbor).append(" ");
             }
-            sb.append("\n");
+            stringbuilder.append("\n");
         }
-        return sb.toString();
+        return stringbuilder.toString();
     }
 
     /**
