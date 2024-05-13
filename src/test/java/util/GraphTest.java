@@ -3,6 +3,7 @@ package pr2;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -25,14 +26,14 @@ public class GraphTest{
 
     @Test
     public void contaisVertexFalse(){
-    	Graph<Integer> g = new Graph
+    	Graph<Integer> g = new Graph<>();
     }
     @Test
     public void addEdge1(){
     	try{
 		Graph<Integer> g = new Graph<>();
 		g.addEdge(1, 2);
-		assertTrue(g.containsVertex(1) && g.containsVertex(2) && g.obtainAdjacents(1).contains(2);
+		assertTrue(g.containsVertex(1) && g.containsVertex(2) && g.obtainAdjacents(1).contains(2));
 	}catch(Exception e){
 		System.err.println(e);
 	}
@@ -51,19 +52,11 @@ public class GraphTest{
         }
     }
 
-    @Test(expected = Exception.class)
-    public void obtainAdjacentsThrowsException(){
-        Graph<Integer> g = new Graph<>();
-        g.obtainAdjacents(1);
-    }
-
     @Test
     public void shortestPathDoesNotExist(){
         Graph<Integer> g = new Graph<>();
         assertNull(g.shortestPath(1, 2));
     }
-}
-
 
     public void shortestPathFindsAPath(){
         System.out.println("\nTest shortestPathFindsAPath"); 

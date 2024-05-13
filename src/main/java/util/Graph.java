@@ -1,3 +1,5 @@
+package pr2;
+
 import java.util.*;
 
 public class Graph<V> {
@@ -74,7 +76,7 @@ public class Graph<V> {
 
     /**
      * Obtiene, en caso de que exista, el camino más corto entre `v1` y `v2`. En caso contrario, devuelve `null`.
-     *
+     
      * @param v1 el vértice origen.
      * @param v2 el vértice destino.
      * @return lista con la secuencia de vértices del camino más corto entre `v1` y `v2`.
@@ -83,3 +85,6 @@ public class Graph<V> {
         if (!adjacencyList.containsKey(v1) || !adjacencyList.containsKey(v2)) {
             return null;
         }
+	return null;
+    }
+}
