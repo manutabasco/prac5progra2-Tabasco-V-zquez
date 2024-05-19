@@ -58,6 +58,8 @@ public class GraphTest{
         assertNull(g.shortestPath(1, 2));
     }
 
+
+    @Test
     public void shortestPathFindsAPath(){
         System.out.println("\nTest shortestPathFindsAPath"); 
         System.out.println("----------------------------"); 

@@ -13,11 +13,11 @@ public class Graph<V> {
      * @return `true` si no estaba anteriormente y `false` en caso contrario.
      */
     public boolean addVertex(V v) {
-        if (!adjacencyList.containsKey(v)) {
-            adjacencyList.put(v, new HashSet<>());
-            return true;
+        if (adjacencyList.containsKey(v)) {
+            return false;
         }
-        return false;
+        adjacencyList.put(v, new HashSet<V>());
+        return true;
     }
 
     /**
@@ -76,7 +76,7 @@ public class Graph<V> {
 
     /**
      * Obtiene, en caso de que exista, el camino más corto entre `v1` y `v2`. En caso contrario, devuelve `null`.
-     
+     * 
      * @param v1 el vértice origen.
      * @param v2 el vértice destino.
      * @return lista con la secuencia de vértices del camino más corto entre `v1` y `v2`.
@@ -85,6 +85,42 @@ public class Graph<V> {
         if (!adjacencyList.containsKey(v1) || !adjacencyList.containsKey(v2)) {
             return null;
         }
-	return null;
+
+        Map<V, V> predecessors = new HashMap<>();
+        Queue<V> queue = new LinkedList<>();
+        Set<V> visited = new HashSet<>();
+
+        queue.add(v1);
+        visited.add(v1);
+
+        while (!queue.isEmpty()) {
+            V current = queue.poll();
+            if (current.equals(v2)) {
+                return reconstructPath(predecessors, v1, v2);
+            }
+
+            for (V neighbor : adjacencyList.get(current)) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    predecessors.put(neighbor, current);
+                    queue.add(neighbor);
+                }
+            }
+        }
+        return null; // Si no se encuentra un camino
+    }
+
+    private List<V> reconstructPath(Map<V, V> predecessors, V start, V end) {
+        List<V> path = new LinkedList<>();
+        for (V at = end; at != null; at = predecessors.get(at)) {
+            path.add(at);
+        }
+        Collections.reverse(path);
+        if (path.get(0).equals(start)) {
+            return path;
+        } else {
+            return null;
+        }
     }
 }
+
